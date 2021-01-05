@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no,minimum-scale=1"/>
+<title>Vendor Review</title>
+    <style type="text/css" >
+        @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+.xform {
+            padding-left: 50px;
+      }
+        .banner {
+            height: 40px;
+            background-color: darkgrey ;
+            width: 75%;
+            padding-top: 10px;
+            padding-left: 50px;
+            font-size: 20px;
+            font-weight: bold ;
+        }
+        
+
+
+   
+  td {
+            font: 10px Verdana;  
+            border: 1px solid lightgray ;
+      }
+    td.xbold {
+font: bold 10px Verdana;
+background: #E1EEF5;
+}
+table {
+   border: 1px solid lightgray ;
+     }    
+ body { font-size: 18px; }
+
+     
+    </style>
+</head>
+<body>
+<div class="container">
+<div  style="
+    width:80%;
+    height:600px;
+    margin: 0 auto;
+    ">
+    <img src="./images/logo.png" alt="Bidvest Facilities Management" id="logo" data-height-percentage="75" data-actual-width="225" data-actual-height="87">
+    <div class = "banner"> Request For Quotation <b>600021213</b> </div>
+ <div id = "main" class="xform">
+
+     <p>Kindly Quote on the Following Items</p><p> <b id="VN"> y</b></p>
+
+
+     <b> Comment: </b>
+     <div><textarea rows="2" cols="25" id="commenton"></textarea></div> <br>
+     <br>
+     <div class= "xform">
+     <span class="myButton" id="mysubmit" style="background-color: rgb(68, 199, 103); border-radius: 14px; border: 1px solid rgb(24, 171, 41); display: inline-block; cursor: pointer; color: rgb(255, 255, 255); font-family: Arial; font-size: 14px; padding: 8px 15px; text-decoration: none; text-shadow: rgb(47, 102, 39) 0px 1px 0px;">Submit</span> </div>
+</div>
+    <div id = msg>Thank You </div>
+    </div> 
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+var  radioValue = '0';
+var sPageURL = window.location.search.substring(1)  ; 
+
+var getUrlParameter = function getUrlParameter(sParam) {
+var sURLVariables = atob(sPageURL.substring(3)).split('&'),
+    sParameterName,
+    i;
+
+for (i = 0; i < sURLVariables.length; i++) {
+    sParameterName = sURLVariables[i].split('=');
+
+    if (sParameterName[0] === sParam) {
+        return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+   
+
+
+$(document).ready(function(){
+    $("#msg").hide();
+    if (sPageURL.length < 25) {
+        window.location.replace("https://bidvestfacilitiesmanagement.co.za");
+    }
+
+ 
+ var urlget = 'https://io.bidvestfm.co.za/BIDVESTFM_API_GEN_AUTH_DEV/api/GETFLEX?Partner=0&Class=RFQG&CallContext=',
+     headers = {'Authorization': "Bearer 123456", 'apikey':"GENAPP"  } ;                  
+
+
+    /* $.get(jobcard, function(data, status) {
+         var jcarray = JSON.parse(data.list) ;
+         for (var jc=0; jc < jcarray.length; jc++){
+          for ( var key in jcarray[jc]  ) {
+             if (jcarray[jc].hasOwnProperty(key)) {
+                 var jcid = "#" + key ;  
+                 $(jcid).text(jcarray[jc][key]); 
+          }
+         }
+         }
+     })  ;  */
+  $("#getdetail").click(function(){
+      alert("Here is more detail")
+  }) ;
+
+  $("#mysubmit").click(function(){
+      
+  var comment = $("#commenton").val() ;
+  var lclrate = (radioValue.substring(1,2) == ".") ?radioValue.substring(0,3) : radioValue.substring(0,1) ;
+      
+  var icall = "{CALLGUID:"+ getUrlParameter('q') +  "}" ;
+      $.ajaxSetup({
+   headers:headers
+});
+   $.get(job + icall, function(data, status){
+  if ( data.ServicesList[0].JsonsetJstext == "{}") {
+      $("#main").hide() ;
+      $("#msg").show();
+             
+  } else {
+$("#star5").prop("checked",false);
+$("#star4half").prop("checked",false);
+$("#star4").prop("checked",false);
+$("#star3half").prop("checked",false);
+$("#star3").prop("checked",false);
+$("#star2half").prop("checked",false);
+$("#star2").prop("checked",false);
+$("#star1half").prop("checked",false);
+$("#star1").prop("checked",false);
+$("#starhalf").prop("checked",false);
+    radioValue = '0';
+    sPageURL = 'id=' + data.ServicesList[0].JsonsetJstext ; 
+    $("#rating").text("Please Select Star") ;
+    $("#UN").text(getUrlParameter('UN') );
+    $("#VN").text(getUrlParameter('VN') );
+    $("#PO").text(getUrlParameter('PO') );
+     var mt = getUrlParameter('MT');
+    if (mt) {
+ $("#services").text( mt );       
+    } else {
+ $("#services").text("Building Services " );
+        }
+    $("#commenton").val('');
+  }
+});
+});
+});
+</script>    
+</body>
+</html>

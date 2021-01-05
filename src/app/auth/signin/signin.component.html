@@ -1,0 +1,121 @@
+<div class="container" [hidden]="!usesignin">
+  <div class="row pt-3 pb-3">
+    <div class="col-xs-12 col-sm-8 col-md-5 offset-sm-1  offset-md-3">
+      <div class="card ">
+        <div class="card-header">
+          <h3 style="text-align:center;">Please Login</h3>
+        </div>
+
+        <form (ngSubmit)="onSignin(f)" #f="ngForm">
+          <div class="form-group pl-2 pr-2">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" ngModel class="form-control">
+          </div>
+          <div class="form-group  pl-2 pr-2">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" ngModel class="form-control">
+          </div>
+          <div [hidden]="!newpwd4" class="alert alert-danger">
+            {{newpwd4}}
+          </div>
+          <div class="pl-3 pt-1 pb-2"> <a (click)="onSelect('reset')"> Forgot Password?</a>
+            <!--  <a routerLink="/auth/reset"> Forgot Password?</a> -->
+          </div>
+          <div class="d-flex justify-content-around pb-2">
+            <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Sign In</button>
+            <a class="btn btn-dark" routerLink="/auth/register">Register here</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" [hidden]="!usereset">
+  <div class="row pt-3 pb-3">
+    <div class="col-xs-12 col-sm-8 col-md-5 offset-sm-1  offset-md-3">
+      <div class="card ">
+        <div class="card-header"> Select a Method for OTP Receipt</div>
+        <div class="card-body pt2">
+          <div class="form-group">
+            <label for="uname">User Email:</label>
+            <input type="text" class="form-control" [(ngModel)]="username" id="uname">
+          </div>
+          <label>
+            <input type="radio" [(ngModel)]="commethod" name="SMS" value="SMS" (change)="onRadioChange('SMS')" />
+            SMS OTP</label> <br>
+          <label>
+            <input type="radio" [(ngModel)]="commethod" name="EMAIL" value="EMAIL" (change)="onRadioChange('EMAIL')" />
+            Email OTP</label>
+        </div>
+
+        <div class="card-footer" [hidden]="commethod !=='SMS'">
+          <div class="form-group">
+            <label for="sms">SMS No:</label>
+            <input type="text" class="form-control" [(ngModel)]="cellno" id="cellno">
+          </div>
+          <div [hidden]="!newpwd3" class="alert alert-danger">
+            {{newpwd3}}
+          </div>
+          <div [hidden]="!newpwd4" class="alert alert-success">
+            {{newpwd4}}
+          </div>
+        </div>
+        <div class="d-flex justify-content-around pb-2">
+          <a class="btn btn-primary" (click)="onResetRequest()">Submit</a>
+          <button class="btn btn-dark" type="submit" (click)="onSelect('signin')">Sign In</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" [hidden]="!useotp">
+  <div class="row pt-3 pb-3">
+    <div class="col-xs-12 col-sm-8 col-md-5 offset-sm-1  offset-md-3">
+      <div class="card ">
+        <div class="card-header"> Please Enter OTP</div>
+        <div class="card-body pt2">
+          <div class="form-group">
+            <label for="otpin">OTP:</label>
+            <input type="text" class="form-control" [(ngModel)]="otpin" id="otpin">
+          </div>
+          <div [hidden]="!newpwd4" class="alert alert-success">
+            {{newpwd4}}
+          </div>
+        </div>
+        <div class="d-flex justify-content-around pb-2">
+          <a class="btn btn-primary" (click)="onOTPSend()">Submit</a>
+          <button class="btn btn-dark" type="submit" (click)="onSelect('signin')">Sign In</button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="container" [hidden]="!usenewpwd">
+  <div class="row pt-3 pb-3">
+    <div class="col-xs-12 col-sm-8 col-md-5 offset-sm-1  offset-md-3">
+      <div class="card ">
+        <div class="card-header">
+          <h3 style="text-align:center;">Please Set New Password</h3>
+        </div>
+
+        <form (ngSubmit)="onNewPassword(g)" #g="ngForm">
+          <div class="form-group  pl-2 pr-2">
+            <label for="password4">Password</label>
+            <input type="password" id="password4" name="password4" ngModel class="form-control">
+          </div>
+          <div class="form-group  pl-2 pr-2">
+            <label for="password3">Password</label>
+            <input type="password" id="password3" name="password3" ngModel class="form-control">
+          </div>
+          <div class="d-flex justify-content-around pb-2">
+            <button class="btn btn-primary" type="submit" [disabled]="!g.valid">Update</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

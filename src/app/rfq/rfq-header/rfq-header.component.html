@@ -1,0 +1,65 @@
+<div class="row mb-5 mt-2">
+  <div class="col-md-10  offset-md-1">
+    <div class="card">
+      <div class="card-header d-flex justify-content-around">
+        <div>
+          <button class="button btn-info btn-sm" (click)="apirfqdoc.orchlist.show = 'baselist'">
+            Back to list view
+          </button>
+        </div>
+        <div>
+          <button class="button btn-info btn-sm" (click)="docsToggle()">
+            {{ docsdirection }}
+          </button>
+        </div>
+      </div>
+      <div class="card-body ">
+        <div class="d-flex justify-content-around">
+          <div>
+            <h4>QUOTATION</h4>
+            <h5>RFQ number: {{ lclrfqdoc.RFQNO }}</h5>
+            <h5>Vendor: {{ lclrfqdoc.VENDOR }}</h5>
+            <h4>Cutoff:{{ lclrfqdoc.CUTOFF }}</h4>
+
+            <a class="button btn-primary" routerLink="/topdf"
+              style="padding-left: 8px;padding-right: 8px; border-radius:3px;">
+              View RFQ as Pdf
+            </a>
+          </div>
+          <div *ngIf="docsload == 'UP'">
+
+            <h5> Response Documents</h5>
+
+            <table class="table  table-sm" style="width:100%">
+              <tr *ngFor="let rfqdoc of apirfqdoc.chosensubmilist.asObservable() | async">
+                <!-- <td (click)="modpen(item) "><button type="button" class="btn btn-xs">Download</button> </td>-->
+                <td (click)="downloaddoc(rfqdoc)" style="font-size: 0.75rem; color:blue;">
+                  {{ rfqdoc.ORIGINALNAME }}
+                </td>
+              </tr>
+            </table>
+            <div>
+              <label for="file-upload" class="custom-file-upload">
+                <i class="fa fa-cloud-upload"></i> Upload Response Document
+              </label>
+              <input type="file" id="file-upload" (change)="loaddoc($event.target.files)" />
+              {{myFile}}
+            </div>
+          </div>
+          <div *ngIf="docsload == 'DOWN'">
+            <h5>Documents to Download</h5>
+            <table class="table  table-sm" style="width:100%">
+              <tr *ngFor="let rfqdoc of apirfqdoc.chosendoclist | async">
+                <!-- <td (click)="modpen(item) "><button type="button" class="btn btn-xs">Download</button> </td>-->
+                <td (click)="downloaddoc(rfqdoc)" style="font-size: 0.75rem; color:blue;">
+                  {{ rfqdoc.ORIGINALNAME }}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-rfq-items></app-rfq-items>

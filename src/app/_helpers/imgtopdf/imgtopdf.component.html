@@ -1,0 +1,72 @@
+<div class="container" style="background-color:white; padding-top:5px">
+  <div class=" row d-flex justify-content-center">
+    <div id="pageout">
+      <div class="row">
+
+        <!-- Page Heading -->
+        <div class="card-columns">
+          <div class="card  border-0">
+            <div class="card-body">
+              <a href="#/" title="Home"><img src="assets/images/logo2small.png" /></a>
+            </div>
+          </div>
+          <div class="card  border-0 p-3">
+            <div class="card-body">
+              <h4>Request for Quotation</h4>
+              <h5>Reference number: {{chosenrfq.RFQNO}}</h5>
+              <h5>Vendor: {{chosenrfq.VENDOR}}</h5>
+              <h4>Deadline:{{chosenrfq.CUTOFF}}</h4>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- /.container-fluid -->
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card  border-0">
+            <div class="card-body">
+
+              <table class="table table-responsive table-striped w-100 d-block d-md-table">
+                <tr>
+
+                  <th>Item</th>
+                  <th>Material</th>
+                  <th>Text</th>
+                  <th>Qty</th>
+                  <th>Unit</th>
+                  <th>Delivery Date</th>
+                  <th>Quoted Price</th>
+
+                </tr>
+
+                <tr *ngFor="let item of rfqItems">
+
+                  <td>{{item.ITEMNO}}</td>
+                  <td>{{item.MATERIAL}}</td>
+                  <td>{{item.MTEXT}}</td>
+                  <td>{{item.QUANTITY}}</td>
+                  <td>{{item.UNIT}}</td>
+                  <td>{{item.DELIVERYDATE}}</td>
+                  <td>{{item.PRICE}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-6">
+      <a class="btn btn-outline-primary" (click)="captureScreen()">Save as Pdf</a>
+    </div>
+    <div class="col-6">
+      <a class="btn btn-outline-danger" href="#/tenders">Cancel</a>
+    </div>
+
+  </div>
+  <br>
+</div>

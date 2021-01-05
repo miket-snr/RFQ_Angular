@@ -1,0 +1,59 @@
+<!-- ******************************************************************* -->
+
+<div class="card mt-2 mb-20">
+  <div *ngIf="rfqItems">
+    <!-- Editable table -->
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Quotation</h3>
+    <div class="card-body">
+      <div id="table" class="table-editable">
+        <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x"
+              aria-hidden="true"></i></a></span>
+        <table class="table table-bordered table-responsive-md table-striped text-center">
+          <thead>
+            <tr>
+              <th class="text-center">Item</th>
+              <th class="text-center">Material</th>
+              <th class="text-center">Text</th>
+              <th class="text-center">Qty</th>
+              <th class="text-center">Unit</th>
+              <th class="text-center">Delivery Date</th>
+              <th class="text-center">Quoted Price</th>
+              <th class="text-center">Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of rfqItems ">
+              <td class="pt-3-half" contenteditable="true">{{ item.ITEMNO.toString() }}</td>
+              <td class="pt-3-half" contenteditable="true">30</td>
+              <td class="pt-3-half" contenteditable="true">{{ item.MTEXT }}</td>
+              <td class="pt-3-half" contenteditable="true">{{ item.QUANTITY }}</td>
+              <td class="pt-3-half" contenteditable="true">{{ item.UNIT}}</td>
+              <td class="pt-3-half" contenteditable="true">{{ item.DELIVERYDATE }}</td>
+              <td class="pt-3-half" contenteditable="true">{{ item.PRICE }}</td>
+              <td>
+                <span><button type="button" class="btn btn-danger btn-rounded btn-sm my-0"
+                    (click)="open(item)">Edit</button></span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Editable table -->
+
+  </div>
+  <div class="modal-footer" style="background-color:ghostwhite;">
+    <div class="col-sm-4">
+      <a [ngClass]="(dirty)?'btn btn-success':'btn btn-outline-primary'" (click)="updateQuote()">Update</a>
+    </div>
+    <div class="col-sm-4">
+      <a class="btn btn-outline-danger" (click)="rfqapi.orchlist.show = 'baselist'">Cancel</a>
+    </div>
+  </div>
+</div>
+
+<jw-modal id="rfqitemedit">
+  <app-rfq-item-detail (closer)="closeModal($event)"></app-rfq-item-detail>
+</jw-modal>

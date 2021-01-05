@@ -1,0 +1,55 @@
+<!-- ******************************************************************* -->
+<div *ngIf="lclRFQItem" class="card mt-2 mb-20">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card" style="background-color:lightsteelblue;">
+        <div class="card-header">
+          <b>Requirement:</b> {{lclRFQItemCopy.MTEXT}}
+        </div>
+        <div class="card-body">
+
+          <div [hidden]="submitted">
+            <h1>Quotation</h1>
+            <form (ngSubmit)="onSubmit()" #itemForm="ngForm">
+              <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" class="form-control" id="price" required [(ngModel)]="lclRFQItemCopy.PRICE"
+                  name="price" #price="ngModel">
+                <div [hidden]="price.valid || price.pristine" class="alert alert-danger">
+                  Price is required
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="deldate">Delivery Date</label>
+                <input type="date" class="form-control" id="deldate" required [(ngModel)]="lclRFQItemCopy.DELIVERYDATE"
+                  name="deldate" #deldate="ngModel">
+                <div [hidden]="deldate.valid || deldate.pristine" class="alert alert-danger">
+                  Delivery Date is required
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label for="power">Unit of Measure</label>
+                <select class="form-control" id="uom" required [(ngModel)]="lclRFQItemCopy.UNIT" name="unit"
+                  #uom="ngModel">
+                  <option *ngFor="let uom of uoms" [value]="uom">{{uom}}</option>
+                </select>
+                <div [hidden]="uom.valid || uom.pristine" class="alert alert-danger">
+                  Unit of Measure is required
+                </div>
+              </div>
+              <div class="d-flex justify-content-around">
+                <button type="submit" class="btn btn-success" [disabled]="!itemForm.form.valid">OK</button>
+                <button type="button" class="btn btn-primary" (click)=" resetModal()">Reset</button>
+                <a class="btn btn-outline-danger" (click)="itemForm.reset();resetModal();closeModal()">Cancel</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ******************************************************************* -->

@@ -1,0 +1,32 @@
+<div  class="row mb-5 mt-2">
+  <div class="col-md-8 offset-md-2">
+    <div class="card">
+      <div class="card-header">
+        <h1 style="text-align:center">RFQ or Tenders for your attention</h1>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Tender Ref</th>
+            <th>RFQ Document</th>
+            <th>Cutoff Date</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of rfqapis.rfqList | async">
+            <td>{{ item.SUBMI }}</td>
+            <td>{{ item.RFQNO }}</td>
+            <td>{{ item.CUTOFF }}</td>
+            <td>
+              <button class="button btn-secondary btn-sm" (click)="chooselist(item)">
+                Details...
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- ******************************************************************* -->

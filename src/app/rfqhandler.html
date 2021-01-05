@@ -1,0 +1,85 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BidvestFM Partners</title>
+
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <div class="container">
+
+  <div class="row mt-3 justify-content-center align-self-center">
+      <div class="col-lg-6 col-md-4 col-sm-8 ">
+
+ <div>
+          <img src="/BIDVESTFM_API_AUTH/ESourcing//assets/images/logo2small.png" alt="logo">
+        </div>
+
+  </div>
+
+  <div class="col-lg-3 col-md-4 col-sm-8 ">
+
+  <img src="/BIDVESTFM_API_AUTH/ESourcing//assets/images/phone.png" alt="phone">
+        <a href="tel:0027126418000">+27 12 641 8000</a>
+      </div>
+
+ <div class="col-lg-3 col-md-4 col-sm-8 ">
+        <img src="/BIDVESTFM_API_AUTH/ESourcing//assets/images/email.png" alt="phone">
+
+   <a href="mailto:info@bidvestfm.co.za">info@bidvestfm.co.za</a>
+
+      </div>
+    </div>
+    </div>
+
+<script>
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
+}
+var HttpClient = function() {
+    this.get = function(aUrl, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+
+        anHttpRequest.onreadystatechange = function() {
+            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                aCallback(anHttpRequest.responseText);
+        }
+
+        anHttpRequest.open( "GET", aUrl, true );
+        anHttpRequest.setRequestHeader("Authorization", "Bearer 123456");
+anHttpRequest.setRequestHeader("apikey", "GENAPP");
+        anHttpRequest.send( null );
+    }
+}
+
+const lclref = findGetParameter("ref") ;
+
+// var client = new HttpClient();
+// client.get('https://io.bidvestfm.co.za/BIDVESTFM_API_AUTH/api/sap/rfq/getone/'+ lclref + '?CallContext={}', function(response) {
+// const resp = JSON.parse(response);
+// if (typeof resp.ServicesList === 'undefined' || typeof resp.ServicesList[0] === 'undefined') {
+// return;
+// } else {
+// //localStorage.setItem ("rfqToken" ,JSON.parse(resp.ServicesList[0].JsonsetJstext).RFQQUOTE ) ;
+// //window.location.href = 'http://localhost:4200/index.html';
+// //window.location.href = 'https://io.bidvestfm.co.za/BIDVESTFM_API_AUTH/ESourcing/index.html';
+// }
+});
+ </script>
+ </body>
+</html>
